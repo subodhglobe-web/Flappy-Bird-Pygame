@@ -77,42 +77,54 @@ def gameOver():
 
 def bird(x, y, image):
     surface.blit(image, (x, y))
+    
+
 
 
 def main():
     x = 150
     y = 200
     y_move = 0
+   
+   # Load the music file
+    pygame.mixer.music.load('Initial.mp3')
+    # Play the music
+    pygame.mixer.music.play()
+
+
 
     x_block = surfaceWidth
     y_block = 0
 
     block_width = 50
-    block_height = random.randint(0, surfaceHeight / 2)
+    block_height = random.randint(0, surfaceHeight // 2)
     gap = img_height * 5
 
     # speed of blocks
-    block_move = 5
+    block_move = 5  
 
     score = 0
     game_over = False
 
     # Game Loop/ Game State
     while not game_over:
+        # Load the music file
+        pygame.mixer.music.load('Starting.mp3')
+        # Play the music
+        pygame.mixer.music.play()
 
+        key_pressed = False
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 game_over = True
-
-            # keydown - when button is pressed keyup - when it's released
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_UP:
-                    y_move = -5
-
-            if event.type == pygame.KEYUP:
-                if event.key == pygame.K_UP:
-                    y_move = 5
-
+            keys = pygame.key.get_pressed() 
+             # keydown - when button is pressed keyup - when it's released
+            if keys[pygame.K_UP]:
+                y_move = -5
+            elif keys[pygame.K_DOWN]:      # Move up if UP key is pressed
+                y_move = 5
+            else:
+               y_move = 0   # No movement if no key is pressed
         y = y + y_move
 
         surface.fill(blue)
@@ -148,7 +160,7 @@ def main():
         # blocks on screen or not
         if x_block < (-1 * block_width):
             x_block = surfaceWidth
-            block_height = random.randint(0, surfaceHeight / 2)
+            block_height = random.randint(0, surfaceHeight // 2)
 
         # Collision Detection
 
