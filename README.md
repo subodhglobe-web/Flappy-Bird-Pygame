@@ -1,3 +1,5 @@
+**Game Details**
+
 This is a small pythone game used by pygame library. In the game, walls move fast as you cross them. 
 And also added music in the game, for more interactive and entartain.
 
